@@ -1,8 +1,7 @@
 call plug#begin('~/.vim/plugged') 
   Plug 'ayu-theme/ayu-vim'
   Plug 'Yggdroot/indentLine'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
@@ -43,7 +42,8 @@ set titlestring=VIM:\ %-25.55F\ %a%r%m titlelen=70
 set timeoutlen=1000 ttimeoutlen=0
 set tabstop=3 softtabstop=2 shiftwidth=2 expandtab
 "status line configure
-set statusline=[%n]%<%f\ %y%h%m%r%=%-14.(%l/%L:%c%V%)\%p%%
+set laststatus=0
+"set statusline=[%n]%<%f\ %y%h%m%r%=%-14.(%l/%L:%c%V%)\%p%%
 
 syntax enable
 filetype plugin indent on
@@ -175,5 +175,5 @@ function! s:fzf_preview_settings() abort
   let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
 endfunction
 let g:fzf_preview_command = 'batcat --color=always --plain {-1}'
-nnoremap <space>f :CocCommand fzf-preview.ProjectFiles<CR>
+nnoremap <space>f :CocCommand fzf-preview.FromResources project_mru git<CR>
 nnoremap <space>b :CocCommand fzf-preview.Buffers<CR>

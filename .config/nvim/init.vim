@@ -1,22 +1,23 @@
+"vim plug plugin ######{{{{{{}}}{{{
 call plug#begin('~/.vim/plugged') 
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'maxmellon/vim-jsx-pretty'
   Plug 'ayu-theme/ayu-vim'
   Plug 'Yggdroot/indentLine'
-  Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 call plug#end()
-
-
-"let g:indentLine_char = ''
+"}}}}}}
+"let g:indentLine_char = ''{{{
 "let g:indentLine_first_char = ''
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_setColors = 0
 
 let g:coc_global_extensions=[ 'coc-snippets','coc-html','coc-rls', 'coc-pairs',  'coc-prettier', 'coc-json', 'coc-highlight', 'coc-emmet',  'coc-spell-checker', 'coc-tsserver','coc-word','coc-css','coc-smartf','coc-fzf-preview','coc-explorer']
-
-
+"}}}
+"{{{
 set termguicolors     " enable true colors support
 set t_Co=256
 set title
@@ -33,7 +34,7 @@ set mouse=a
 set history=200
 set shortmess+=c
 set updatetime=300
-set foldmethod=syntax
+set foldmethod=marker
 set foldcolumn=1
 set foldlevelstart=99
 set showtabline=2
@@ -44,7 +45,6 @@ set tabstop=3 softtabstop=2 shiftwidth=2 expandtab
 "status line configure
 set laststatus=0
 "set statusline=[%n]%<%f\ %y%h%m%r%=%-14.(%l/%L:%c%V%)\%p%%
-
 syntax enable
 filetype plugin indent on
 " Don't pass messages to |ins-completion-menu|.
@@ -54,7 +54,6 @@ set shortmess+=c
 let ayucolor="mirage" " for mirage version of theme
 "let ayucolor="light"  " for light version of theme
 "let ayucolor="dark"   " for dark version of theme
-
 colorscheme ayu
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
@@ -62,8 +61,8 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-
-" set filetypes as typescriptreact
+"}}}
+" set filetypes as typescriptreact{{{
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -176,4 +175,4 @@ function! s:fzf_preview_settings() abort
 endfunction
 let g:fzf_preview_command = 'batcat --color=always --plain {-1}'
 nnoremap <space>f :CocCommand fzf-preview.FromResources project_mru git<CR>
-nnoremap <space>b :CocCommand fzf-preview.Buffers<CR>
+nnoremap <space>b :CocCommand fzf-preview.Buffers<CR>"}}}

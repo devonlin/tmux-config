@@ -117,6 +117,7 @@ alias c='clear'
 alias s='source'
 alias t='tmux'
 alias v='vifm'
+alias b='batcat'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 

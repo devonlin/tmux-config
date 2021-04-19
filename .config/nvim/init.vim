@@ -1,24 +1,15 @@
-"vim plug plugin ######{{{{{{}}}{{{
+"vim plug plugin ######{{{{{{}}}{{{/*{*/
 call plug#begin('~/.vim/plugged') 
-  Plug 'HerringtonDarkholme/yats.vim'
-  Plug 'maxmellon/vim-jsx-pretty'
-  Plug 'ayu-theme/ayu-vim'
+  "Plug 'rakr/vim-one'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'sainnhe/forest-night'
   Plug 'Yggdroot/indentLine'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 call plug#end()
-"}}}}}}
-"let g:indentLine_char = ''{{{
-"let g:indentLine_first_char = ''
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_showFirstIndentLevel = 1
-let g:indentLine_setColors = 0
-
-let g:coc_global_extensions=[ 'coc-snippets','coc-html','coc-rls', 'coc-pairs',  'coc-prettier', 'coc-json', 'coc-highlight', 'coc-emmet',  'coc-spell-checker', 'coc-tsserver','coc-word','coc-css','coc-smartf','coc-fzf-preview','coc-explorer']
-"}}}
-"{{{
-set termguicolors     " enable true colors support
+"}}}}}}/*}*/
+set termguicolors     " enable true colors support/*{*/
 set t_Co=256
 set title
 set hidden
@@ -35,6 +26,7 @@ set history=200
 set shortmess+=c
 set updatetime=300
 set foldmethod=marker
+set foldmarker=/*{*/,/*}*/
 set foldcolumn=1
 set foldlevelstart=99
 set showtabline=2
@@ -44,25 +36,36 @@ set timeoutlen=1000 ttimeoutlen=0
 set tabstop=3 softtabstop=2 shiftwidth=2 expandtab
 "status line configure
 set laststatus=0
+set shortmess+=c
+set splitbelow splitright
 "set statusline=[%n]%<%f\ %y%h%m%r%=%-14.(%l/%L:%c%V%)\%p%%
 syntax enable
 filetype plugin indent on
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="light"  " for light version of theme
-"let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+
+"let g:indentLine_char = ''{{{
+"let g:indentLine_first_char = ''
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 0
+let g:coc_global_extensions=[ 'coc-snippets','coc-html','coc-rls', 'coc-pairs',  'coc-prettier', 'coc-json', 'coc-highlight', 'coc-emmet',  'coc-spell-checker', 'coc-tsserver','coc-word','coc-css','coc-smartf','coc-fzf-preview','coc-explorer']
+"forest night theme settings
+"let g:forest_night_current_word = 'bold'
+"let g:forest_night_diagnostic_text_highlight = 1
+"let g:forest_night_diagnostic_line_highlight = 1
+"let g:forest_night_enable_italic = 1
+let g:forest_night_better_performance = 1
+let g:forest_night_background = 'hard'
+let g:forest_night_cursor = 'green'
+let g:forest_night_transparent_background = 1
+colorscheme forest-night
+
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
   set signcolumn=yes
-endif
-"}}}
-" set filetypes as typescriptreact{{{
+endif"/*}*/
+" set filetypes as typescriptreact{{{/*{*/
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -107,6 +110,9 @@ augroup Smartf
   autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
 augroup end
 
+"augroup TabColors
+"  autocmd ColorScheme :hi TabLineSel guifg=LightGreen guibg=NONE
+"augroup END
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -176,3 +182,14 @@ endfunction
 let g:fzf_preview_command = 'batcat --color=always --plain {-1}'
 nnoremap <space>f :CocCommand fzf-preview.FromResources project_mru git<CR>
 nnoremap <space>b :CocCommand fzf-preview.Buffers<CR>"}}}
+
+augroup exe_code
+  autocmd!
+
+  autocmd FileType javascript nnoremap <buffer> <space>r
+    \ :sp<CR> :term nodejs %<CR> :startinsert<CR>
+  autocmd FileType typescript nnoremap <buffer> <space>r
+    \ :sp<CR> :term nodejs %<CR> :startinsert<CR>
+augroup END"/*}*/
+"tabline customization
+
